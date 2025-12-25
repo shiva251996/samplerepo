@@ -24,10 +24,19 @@ resource "aws_ecs_service" "grafana" {
   task_definition = aws_ecs_task_definition.grafana.arn
   desired_count   = 1
   launch_type     = "FARGATE"
+  platform_version = "LATEST"
 
   network_configuration {
     subnets         = var.private_subnets
     security_groups = [aws_security_group.grafana.id]
-    assign_public_ip = true
+    assign_public_ip = false
   }
+
+  load_balancer {
+    target_group_arn = aws_lb_target_group.grafana.arn
+    container_name   = "grafana"   # must match container definition name
+    container_port   = 3000
+  }
+
+  depends_on = [aws_lb_listener.https]
 }
