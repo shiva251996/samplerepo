@@ -40,7 +40,8 @@ resource "aws_lb_target_group" "grafana" {
   target_type = "ip"
 
   health_check {
-    path                = "/"
+    # Use Grafana's health endpoint which returns a 200 when healthy
+    path                = "/api/health"
     healthy_threshold   = 2
     unhealthy_threshold = 2
     timeout             = 5
