@@ -13,7 +13,7 @@ resource "aws_ecs_task_definition" "grafana" {
       containerPort = 3000
     }]
     environment = [
-      { name = "GF_SECURITY_ADMIN_PASSWORD", value = "Admin@123" }
+      { name = "GF_SECURITY_ADMIN_PASSWORD", value = var.grafana_admin_password }
     ]
   }])
 }

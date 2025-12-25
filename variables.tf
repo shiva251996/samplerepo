@@ -30,3 +30,9 @@ variable "public_subnets" {
   description = "Public subnets for ALB"
   type        = list(string)
 }
+
+variable "grafana_admin_password" {
+  description = "Grafana admin password (avoid hardcoding in production)"
+  type        = string
+  default     = "Admin@123"
+}

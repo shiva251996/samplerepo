@@ -14,7 +14,7 @@ private_subnets = [
 ]
 
 # Restrict to your IP/CIDR when possible. Temporary example:
-allowed_cidr = "203.0.113.0/32"
+allowed_cidr = "0.0.0.0/0"
 
 # Leave empty if no ACM cert yet (we will use HTTP listener)
 certificate_arn = ""
