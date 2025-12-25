@@ -10,15 +10,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "loki_lifecycle" {
     status = "Enabled"
 
     filter {
-      # set the prefix for objects this rule applies to, e.g. "loki/" or "" for entire bucket
       prefix = ""
-      # OR use an 'and' block for prefix + tags:
-      # and {
-      #   prefix = "loki/"
-      #   tags = {
-      #     "some-tag" = "value"
-      #   }
-      # }
     }
 
     expiration {
@@ -26,7 +18,7 @@ resource "aws_s3_bucket_lifecycle_configuration" "loki_lifecycle" {
     }
 
     noncurrent_version_expiration {
-      days = 30
+      noncurrent_days = 30
     }
   }
 }
