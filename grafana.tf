@@ -34,9 +34,7 @@ resource "aws_ecs_service" "grafana" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.grafana.arn
-    container_name   = "grafana"   # must match container definition name
+    container_name   = "grafana"
     container_port   = 3000
   }
-
-  depends_on = [aws_lb_listener.https]
 }

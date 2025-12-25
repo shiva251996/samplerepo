@@ -1,12 +1,12 @@
 resource "aws_security_group" "alb" {
   name        = "obs-alb-sg-${random_pet.suffix.id}"
-  description = "ALB SG (allow HTTPS from allowed CIDR)"
+  description = "ALB SG (allow HTTP from allowed CIDR)"
   vpc_id      = var.vpc_id
 
   ingress {
-    description = "HTTPS from allowed CIDR"
-    from_port   = 443
-    to_port     = 443
+    description = "HTTP from allowed CIDR"
+    from_port   = 80
+    to_port     = 80
     protocol    = "tcp"
     cidr_blocks = [var.allowed_cidr]
   }
@@ -47,12 +47,11 @@ resource "aws_lb_target_group" "grafana" {
   }
 }
 
-resource "aws_lb_listener" "https" {
+# HTTP listener (used when no certificate is provided)
+resource "aws_lb_listener" "http" {
   load_balancer_arn = aws_lb.app.arn
-  port              = 443
-  protocol          = "HTTPS"
-  ssl_policy        = "ELBSecurityPolicy-2016-08"
-  certificate_arn   = var.certificate_arn
+  port              = 80
+  protocol          = "HTTP"
 
   default_action {
     type             = "forward"

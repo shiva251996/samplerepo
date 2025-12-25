@@ -21,8 +21,9 @@ variable "allowed_cidr" {
 }
 
 variable "certificate_arn" {
-  description = "ACM certificate ARN in the same region for HTTPS"
+  description = "ACM certificate ARN in the same region for HTTPS. Leave empty to use HTTP only."
   type        = string
+  default     = ""
 }
 
 variable "public_subnets" {
