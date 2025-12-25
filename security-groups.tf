@@ -1,3 +1,7 @@
+resource "random_pet" "suffix" {
+  length = 2
+}
+
 resource "aws_security_group" "grafana" {
   name   = "obs-grafana-sg"
   vpc_id = var.vpc_id
@@ -18,7 +22,7 @@ resource "aws_security_group" "grafana" {
 }
 
 resource "aws_security_group" "loki" {
-  name   = "obs-loki-sg"
+  name   = "obs-loki-sg-${random_pet.suffix.id}"
   vpc_id = var.vpc_id
 
   ingress {

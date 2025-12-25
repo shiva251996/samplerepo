@@ -16,7 +16,7 @@ resource "aws_ecs_task_definition" "prometheus" {
 }
 
 resource "aws_ecs_service" "prometheus" {
-  name            = "obs-prometheus"
+  name            = "obs-prometheus-${random_pet.suffix.id}"
   cluster         = aws_ecs_cluster.obs.id
   task_definition = aws_ecs_task_definition.prometheus.arn
   desired_count   = 1
