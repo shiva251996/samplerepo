@@ -27,9 +27,12 @@ resource "aws_security_group" "prometheus" {
 resource "aws_service_discovery_service" "prometheus" {
   name = "prometheus"
   dns_config {
-    namespace_id = var.namespace_id
+    namespace_id   = var.namespace_id
     routing_policy = "MULTIVALUE"
-    dns_records { type = "A", ttl = 10 }
+    dns_records {
+      type = "A"
+      ttl  = 10
+    }
   }
   health_check_custom_config { failure_threshold = 1 }
 }

@@ -23,7 +23,12 @@ resource "aws_security_group" "alb" {
     }
   }
 
-  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_security_group" "grafana_task" {
@@ -38,7 +43,12 @@ resource "aws_security_group" "grafana_task" {
     description     = "ALB -> Grafana"
   }
 
-  egress { from_port = 0, to_port = 0, protocol = "-1", cidr_blocks = ["0.0.0.0/0"] }
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
 }
 
 resource "aws_lb" "grafana" {
@@ -93,9 +103,12 @@ resource "aws_lb_listener" "https" {
 resource "aws_service_discovery_service" "grafana" {
   name = "grafana"
   dns_config {
-    namespace_id = var.namespace_id
+    namespace_id   = var.namespace_id
     routing_policy = "MULTIVALUE"
-    dns_records { type = "A", ttl = 10 }
+    dns_records {
+      type = "A"
+      ttl  = 10
+    }
   }
   health_check_custom_config { failure_threshold = 1 }
 }

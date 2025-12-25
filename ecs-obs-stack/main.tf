@@ -1,11 +1,11 @@
 module "vpc" {
-  source     = "./modules/vpc_data"
+  source     = "../Modules/vpc_data"
   vpc_id     = var.vpc_id
   subnet_ids = distinct(concat(var.public_subnet_ids, var.private_subnet_ids))
 }
 
 module "cluster" {
-  source      = "./modules/obs_cluster"
+  source      = "../Modules/obs_cluster"
   name_prefix = var.name_prefix
   vpc_id      = var.vpc_id
 }
@@ -57,7 +57,7 @@ resource "aws_secretsmanager_secret_version" "grafana_admin" {
 }
 
 module "iam" {
-  source                 = "./modules/iam"
+  source                 = "../Modules/iam"
   name_prefix            = var.name_prefix
   aws_region             = var.aws_region
   loki_bucket_arn        = aws_s3_bucket.loki.arn
@@ -65,7 +65,7 @@ module "iam" {
 }
 
 module "loki" {
-  source              = "./modules/loki"
+  source              = "../Modules/loki"
   name_prefix         = var.name_prefix
   aws_region          = var.aws_region
   vpc_id              = var.vpc_id
@@ -84,7 +84,7 @@ module "loki" {
 }
 
 module "prometheus" {
-  source                  = "./modules/prometheus"
+  source                  = "../Modules/prometheus"
   name_prefix             = var.name_prefix
   aws_region              = var.aws_region
   vpc_id                  = var.vpc_id
@@ -104,7 +104,7 @@ module "prometheus" {
 }
 
 module "grafana" {
-  source                 = "./modules/grafana"
+  source                 = "../Modules/grafana"
   name_prefix            = var.name_prefix
   aws_region             = var.aws_region
   vpc_id                 = var.vpc_id
