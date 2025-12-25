@@ -33,10 +33,12 @@ resource "aws_lb" "app" {
 }
 
 resource "aws_lb_target_group" "grafana" {
-  name     = "obs-grafana-tg-${random_pet.suffix.id}"
-  port     = 3000
-  protocol = "HTTP"
-  vpc_id   = var.vpc_id
+  name        = "obs-grafana-tg-${random_pet.suffix.id}"
+  port        = 3000
+  protocol    = "HTTP"
+  vpc_id      = var.vpc_id
+  target_type = "ip"
+
   health_check {
     path                = "/"
     healthy_threshold   = 2
