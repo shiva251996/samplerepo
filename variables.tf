@@ -15,8 +15,9 @@ variable "private_subnets" {
 }
 
 variable "allowed_cidr" {
-  description = "CIDR allowed to access Grafana via ALB (e.g. your office IP)"
+  description = "CIDR allowed to access Grafana via ALB (e.g. your office IP). Default 0.0.0.0/0 (insecure)"
   type        = string
+  default     = "0.0.0.0/0"
 }
 
 variable "certificate_arn" {
