@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "loki" {
 }
 
 resource "aws_ecs_service" "loki" {
-  name            = "obs-loki"
+  name            = "obs-loki-${random_pet.suffix.id}"
   cluster         = aws_ecs_cluster.obs.id
   task_definition = aws_ecs_task_definition.loki.arn
   desired_count   = 1
